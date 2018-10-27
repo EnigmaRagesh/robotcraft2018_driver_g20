@@ -1,0 +1,24 @@
+<?xml version = "1.0"?>
+<launch>
+
+	<!--ARDUINO_PC-->
+    <node name="serial_node"        pkg="rosserial_python"      type="serial_node.py" output = "screen"> 
+    <param name="port"              type="string"               value="/dev/ttyACM0"/>
+    <param name="baud"              type="int"                  value="57600"/>
+    </node>
+
+	<!--ROBOT DRIVER-->
+	<node pkg = "robotcraft2018_driver_g20" name = "robot_driver_node" type = "robot_driver" output = "screen"/>
+	<node pkg = "robotcraft2018_driver_g20" name = "square_test_node" type = "square_test" output = "screen"/>
+	<!--ROBOT_DISPLAY-->
+	<param name="robot_description" textfile="$(find robotcraft2018_robot_description)/urdf/robotcraft2018.urdf" />
+      
+    <!--<node name="rviz" pkg="rviz" type="rviz" args="-d $(find robotcraft2018_robot_description)/robotcraft2018_robot.rviz" />-->
+      
+    <node pkg="robot_state_publisher" type="state_publisher" name="robot_state_publisher">
+            <remap from="joint_state" to="joint_state"/>
+            <param name="publish_frequency" type="double" value="15.0"/>
+    </node>
+	
+
+</launch>

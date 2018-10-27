@@ -1,0 +1,4 @@
+<?xml version = "1.0"?>
+<launch>
+  <node pkg = "robotcraft2018_driver_g20" name = "robot_driver_node" type = "robot_driver" output = "screen"/>
+</launch>
